@@ -1,0 +1,1864 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>src.kernels API documentation</title>
+<meta name="description" content="Kernels for graphs." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML" integrity="sha256-kZafAc6mZvK3W3v1pHOcUix30OHQN6pU/NO2oFkqZVw=" crossorigin></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.kernels</code></h1>
+</header>
+<section id="section-intro">
+<p>Kernels for graphs.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Kernels for graphs.&#34;&#34;&#34;
+
+
+from .base import Kernel
+
+from .count import CountingKernel
+from .node_histogram import NodeHistogramKernel
+from .edge_histogram import EdgeHistogramKernel
+from .order_walk import OrderWalkKernel
+from .geometric_walk import GeometricWalkKernel
+from .shortest_path import ShortestPathKernel
+from .sum import SumKernel
+
+
+__all__ = [
+    &#34;Kernel&#34;,
+
+    &#34;CountingKernel&#34;,
+    &#34;NodeHistogramKernel&#34;,
+    &#34;EdgeHistogramKernel&#34;,
+    &#34;OrderWalkKernel&#34;,
+    &#34;GeometricWalkKernel&#34;,
+    &#34;ShortestPathKernel&#34;,
+    &#34;SumKernel&#34;
+]</code></pre>
+</details>
+</section>
+<section>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+<dl>
+<dt><code class="name"><a title="src.kernels.base" href="base.html">src.kernels.base</a></code></dt>
+<dd>
+<div class="desc"><p>Define the abstract class for kernels.</p></div>
+</dd>
+<dt><code class="name"><a title="src.kernels.count" href="count.html">src.kernels.count</a></code></dt>
+<dd>
+<div class="desc"><p>Define the counting graph kernel.</p></div>
+</dd>
+<dt><code class="name"><a title="src.kernels.edge_histogram" href="edge_histogram.html">src.kernels.edge_histogram</a></code></dt>
+<dd>
+<div class="desc"><p>Define the edge histogram graph kernel.</p></div>
+</dd>
+<dt><code class="name"><a title="src.kernels.geometric_walk" href="geometric_walk.html">src.kernels.geometric_walk</a></code></dt>
+<dd>
+<div class="desc"><p>Define the geometric walk graph kernel.</p></div>
+</dd>
+<dt><code class="name"><a title="src.kernels.node_histogram" href="node_histogram.html">src.kernels.node_histogram</a></code></dt>
+<dd>
+<div class="desc"><p>Define the node histogram graph kernel.</p></div>
+</dd>
+<dt><code class="name"><a title="src.kernels.order_walk" href="order_walk.html">src.kernels.order_walk</a></code></dt>
+<dd>
+<div class="desc"><p>Define the order walk graph kernel.</p></div>
+</dd>
+<dt><code class="name"><a title="src.kernels.shortest_path" href="shortest_path.html">src.kernels.shortest_path</a></code></dt>
+<dd>
+<div class="desc"><p>Define the shortest path graph kernel.</p></div>
+</dd>
+<dt><code class="name"><a title="src.kernels.sum" href="sum.html">src.kernels.sum</a></code></dt>
+<dd>
+<div class="desc"><p>Define the sum graph kernel.</p></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="src.kernels.CountingKernel"><code class="flex name class">
+<span>class <span class="ident">CountingKernel</span></span>
+<span>(</span><span>**kwargs: Dict[str, Any])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Counting graph kernel.</p>
+<p>Create the graph kernel.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>kwargs</code></strong> :&ensp;<code>dict</code> of <code>{str: any}</code></dt>
+<dd>Parameters for the graph kernel.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CountingKernel(Kernel):
+    &#34;&#34;&#34;Counting graph kernel.&#34;&#34;&#34;
+
+    name = &#34;count&#34;
+
+    def __init__(self, **kwargs: Dict[str, Any]):
+        &#34;&#34;&#34;Create the graph kernel.
+
+        Parameters
+        ----------
+        kwargs : dict of {str: any}
+            Parameters for the graph kernel.
+        &#34;&#34;&#34;
+        # Verbosity
+        self.verbose = kwargs.get(&#34;verbose&#34;, False)
+
+        # Specific parameters
+        self.sigma = kwargs.get(&#34;sigma&#34;, 1.)
+
+    def kernel(self, X: List[Graph], Y: Optional[List[Graph]] = None) -&gt; np.ndarray:
+        &#34;&#34;&#34;Compute the kernel between two list of graphs.
+
+        Parameters
+        ----------
+        X : list of networkx.Graph
+            First list of graphs.
+
+        Y : optional list of networkx.Graph, default=None
+            Second list of graphs. If not specified, **X** is used as the second list of graphs.
+            This behavior allows to avoid computing features twice when the kernel is computed
+            on the same lists.
+
+        Returns
+        -------
+        K : np.ndarray
+            Evaluation of the kernel for each graph in **X** and **Y**.
+        &#34;&#34;&#34;
+        # Count nodes
+        X_nodes_count = np.array([graph.number_of_nodes() for graph in X])[:, np.newaxis]
+        if Y is not None:
+            Y_nodes_count = np.array([graph.number_of_nodes() for graph in Y])[:, np.newaxis]
+        else:
+            Y_nodes_count = X_nodes_count.copy()
+
+        # Count edges
+        X_edges_count = np.array([graph.number_of_edges() for graph in X])[:, np.newaxis]
+        if Y is not None:
+            Y_edges_count = np.array([graph.number_of_edges() for graph in Y])[:, np.newaxis]
+        else:
+            Y_edges_count = X_edges_count.copy()
+
+        # Concatenate
+        X = np.hstack((X_nodes_count, X_edges_count))
+        Y = np.hstack((Y_nodes_count, Y_edges_count))
+
+        # Compute the kernel
+        K = gaussian_kernel(X, Y, sigma=self.sigma)
+
+        return K</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>kernels.base.Kernel</li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="src.kernels.CountingKernel.name"><code class="name">var <span class="ident">name</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="src.kernels.CountingKernel.kernel"><code class="name flex">
+<span>def <span class="ident">kernel</span></span>(<span>self, X: List[networkx.classes.graph.Graph], Y: Optional[List[networkx.classes.graph.Graph]] = None) ‑> numpy.ndarray</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the kernel between two list of graphs.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>X</code></strong> :&ensp;<code>list</code> of <code>networkx.Graph</code></dt>
+<dd>First list of graphs.</dd>
+<dt><strong><code>Y</code></strong> :&ensp;<code>optional list</code> of <code>networkx.Graph</code>, default=<code>None</code></dt>
+<dd>Second list of graphs. If not specified, <strong>X</strong> is used as the second list of graphs.
+This behavior allows to avoid computing features twice when the kernel is computed
+on the same lists.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>K</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>Evaluation of the kernel for each graph in <strong>X</strong> and <strong>Y</strong>.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def kernel(self, X: List[Graph], Y: Optional[List[Graph]] = None) -&gt; np.ndarray:
+    &#34;&#34;&#34;Compute the kernel between two list of graphs.
+
+    Parameters
+    ----------
+    X : list of networkx.Graph
+        First list of graphs.
+
+    Y : optional list of networkx.Graph, default=None
+        Second list of graphs. If not specified, **X** is used as the second list of graphs.
+        This behavior allows to avoid computing features twice when the kernel is computed
+        on the same lists.
+
+    Returns
+    -------
+    K : np.ndarray
+        Evaluation of the kernel for each graph in **X** and **Y**.
+    &#34;&#34;&#34;
+    # Count nodes
+    X_nodes_count = np.array([graph.number_of_nodes() for graph in X])[:, np.newaxis]
+    if Y is not None:
+        Y_nodes_count = np.array([graph.number_of_nodes() for graph in Y])[:, np.newaxis]
+    else:
+        Y_nodes_count = X_nodes_count.copy()
+
+    # Count edges
+    X_edges_count = np.array([graph.number_of_edges() for graph in X])[:, np.newaxis]
+    if Y is not None:
+        Y_edges_count = np.array([graph.number_of_edges() for graph in Y])[:, np.newaxis]
+    else:
+        Y_edges_count = X_edges_count.copy()
+
+    # Concatenate
+    X = np.hstack((X_nodes_count, X_edges_count))
+    Y = np.hstack((Y_nodes_count, Y_edges_count))
+
+    # Compute the kernel
+    K = gaussian_kernel(X, Y, sigma=self.sigma)
+
+    return K</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="src.kernels.EdgeHistogramKernel"><code class="flex name class">
+<span>class <span class="ident">EdgeHistogramKernel</span></span>
+<span>(</span><span>**kwargs: Dict[str, Any])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Edge histogram graph kernel.</p>
+<p>Create the graph kernel.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>kwargs</code></strong> :&ensp;<code>dict</code> of <code>{str: any}</code></dt>
+<dd>Parameters for the graph kernel.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class EdgeHistogramKernel(Kernel):
+    &#34;&#34;&#34;Edge histogram graph kernel.&#34;&#34;&#34;
+
+    name = &#34;edge_histogram&#34;
+
+    def __init__(self, **kwargs: Dict[str, Any]):
+        &#34;&#34;&#34;Create the graph kernel.
+
+        Parameters
+        ----------
+        kwargs : dict of {str: any}
+            Parameters for the graph kernel.
+        &#34;&#34;&#34;
+        # Verbosity
+        self.verbose = kwargs.get(&#34;verbose&#34;, False)
+
+        # Specific parameters
+        self.sigma = kwargs.get(&#34;sigma&#34;, 1.)
+
+    def kernel(self, X: List[Graph], Y: Optional[List[Graph]] = None) -&gt; np.ndarray:
+        &#34;&#34;&#34;Compute the kernel between two list of graphs.
+
+        Parameters
+        ----------
+        X : list of networkx.Graph
+            First list of graphs.
+
+        Y : optional list of networkx.Graph, default=None
+            Second list of graphs. If not specified, **X** is used as the second list of graphs.
+            This behavior allows to avoid computing features twice when the kernel is computed
+            on the same lists.
+
+        Returns
+        -------
+        K : np.ndarray
+            Evaluation of the kernel for each graph in **X** and **Y**.
+        &#34;&#34;&#34;
+        # Extract edge histograms
+        X = extract_edge_histograms(X, verbose=self.verbose)
+        if Y is not None:
+            Y = extract_edge_histograms(Y, verbose=self.verbose)
+        else:
+            Y = X.copy()
+
+        # Create arrays containing the edge features
+        X, Y = assemble_histograms(X, Y)
+
+        # Compute the kernel
+        K = gaussian_kernel(X, Y, sigma=self.sigma)
+
+        return K</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>kernels.base.Kernel</li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="src.kernels.EdgeHistogramKernel.name"><code class="name">var <span class="ident">name</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="src.kernels.EdgeHistogramKernel.kernel"><code class="name flex">
+<span>def <span class="ident">kernel</span></span>(<span>self, X: List[networkx.classes.graph.Graph], Y: Optional[List[networkx.classes.graph.Graph]] = None) ‑> numpy.ndarray</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the kernel between two list of graphs.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>X</code></strong> :&ensp;<code>list</code> of <code>networkx.Graph</code></dt>
+<dd>First list of graphs.</dd>
+<dt><strong><code>Y</code></strong> :&ensp;<code>optional list</code> of <code>networkx.Graph</code>, default=<code>None</code></dt>
+<dd>Second list of graphs. If not specified, <strong>X</strong> is used as the second list of graphs.
+This behavior allows to avoid computing features twice when the kernel is computed
+on the same lists.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>K</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>Evaluation of the kernel for each graph in <strong>X</strong> and <strong>Y</strong>.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def kernel(self, X: List[Graph], Y: Optional[List[Graph]] = None) -&gt; np.ndarray:
+    &#34;&#34;&#34;Compute the kernel between two list of graphs.
+
+    Parameters
+    ----------
+    X : list of networkx.Graph
+        First list of graphs.
+
+    Y : optional list of networkx.Graph, default=None
+        Second list of graphs. If not specified, **X** is used as the second list of graphs.
+        This behavior allows to avoid computing features twice when the kernel is computed
+        on the same lists.
+
+    Returns
+    -------
+    K : np.ndarray
+        Evaluation of the kernel for each graph in **X** and **Y**.
+    &#34;&#34;&#34;
+    # Extract edge histograms
+    X = extract_edge_histograms(X, verbose=self.verbose)
+    if Y is not None:
+        Y = extract_edge_histograms(Y, verbose=self.verbose)
+    else:
+        Y = X.copy()
+
+    # Create arrays containing the edge features
+    X, Y = assemble_histograms(X, Y)
+
+    # Compute the kernel
+    K = gaussian_kernel(X, Y, sigma=self.sigma)
+
+    return K</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="src.kernels.GeometricWalkKernel"><code class="flex name class">
+<span>class <span class="ident">GeometricWalkKernel</span></span>
+<span>(</span><span>**kwargs: Dict[str, Any])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Geometric walk graph kernel.</p>
+<p>Create the graph kernel.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>kwargs</code></strong> :&ensp;<code>dict</code> of <code>{str: any}</code></dt>
+<dd>Parameters for the graph kernel.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class GeometricWalkKernel(Kernel):
+    &#34;&#34;&#34;Geometric walk graph kernel.&#34;&#34;&#34;
+
+    name = &#34;geometric_walk&#34;
+
+    def __init__(self, **kwargs: Dict[str, Any]):
+        &#34;&#34;&#34;Create the graph kernel.
+
+        Parameters
+        ----------
+        kwargs : dict of {str: any}
+            Parameters for the graph kernel.
+        &#34;&#34;&#34;
+        # Verbosity
+        self.verbose = kwargs.get(&#34;verbose&#34;, False)
+
+        # Specific parameters
+        self.morgan_steps = kwargs.get(&#34;morgan_steps&#34;, 0)
+        self.wl_steps = kwargs.get(&#34;wl_steps&#34;, 0)
+        self.order = kwargs.get(&#34;order&#34;, 3)
+        self.beta = kwargs.get(&#34;beta&#34;, 0.01)
+
+    def kernel(self, X: List[Graph], Y: Optional[List[Graph]] = None) -&gt; np.ndarray:
+        &#34;&#34;&#34;Compute the kernel between two list of graphs.
+
+        Parameters
+        ----------
+        X : list of networkx.Graph
+            First list of graphs.
+
+        Y : optional list of networkx.Graph, default=None
+            Second list of graphs. If not specified, **X** is used as the second list of graphs.
+            This behavior allows to avoid computing features twice when the kernel is computed
+            on the same lists.
+
+        Returns
+        -------
+        K : np.ndarray
+            Evaluation of the kernel for each graph in **X** and **Y**.
+        &#34;&#34;&#34;
+        # Initialize kernel
+        n = len(X)
+        m = len(Y) if Y is not None else n
+        K = np.zeros((n, m))
+
+        # Label enrichment with Morgan indices
+        X_morgan = label_enrichment_morgan(X, morgan_steps=self.morgan_steps)
+        if Y is not None:
+            Y_morgan = label_enrichment_morgan(Y, morgan_steps=self.morgan_steps)
+        else:
+            Y_morgan = X_morgan
+
+        # Label enrichment with Weisfeiler-Lehman procedure
+        X_wl = label_enrichment_wl(X_morgan, wl_steps=self.wl_steps)
+        if Y is not None:
+            Y_wl = label_enrichment_wl(Y_morgan, wl_steps=self.wl_steps)
+        else:
+            Y_wl = X_wl
+
+        # Compute the kernel
+        beta = 1
+
+        for order in range(1, self.order+1):
+
+            # Update beta
+            beta *= self.beta
+
+            for Xi, Yi in zip(X_wl, Y_wl):
+
+                # Progress bar
+                if self.verbose:
+                    pbar = tqdm(range(n), desc=f&#34;Computing {order}-th order walk kernel&#34;)
+                else:
+                    pbar = range(n)
+
+                visited_graphs = set()
+
+                # Compute walks
+                X_walks = find_nodes_walks(Xi, order=order)
+                if Y is not None:
+                    Y_walks = find_nodes_walks(Yi, order=order)
+                else:
+                    Y_walks = X_walks
+
+                # Compute labels sequences
+                X_sequences = compute_graphs_sequences(Xi, X_walks)
+                if Y is not None:
+                    Y_sequences = compute_graphs_sequences(Yi, Y_walks)
+                else:
+                    Y_sequences = X_sequences
+
+                # Aggregate results
+                for i in pbar:
+                    for j in range(m):
+
+                        if (j, i) in visited_graphs:
+                            K[i, j] = K[j, i]
+                        else:
+                            K[i, j] += beta * len(X_sequences[i] &amp; Y_sequences[j])
+
+                        visited_graphs.add((i, j))
+
+        return K</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>kernels.base.Kernel</li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="src.kernels.GeometricWalkKernel.name"><code class="name">var <span class="ident">name</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="src.kernels.GeometricWalkKernel.kernel"><code class="name flex">
+<span>def <span class="ident">kernel</span></span>(<span>self, X: List[networkx.classes.graph.Graph], Y: Optional[List[networkx.classes.graph.Graph]] = None) ‑> numpy.ndarray</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the kernel between two list of graphs.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>X</code></strong> :&ensp;<code>list</code> of <code>networkx.Graph</code></dt>
+<dd>First list of graphs.</dd>
+<dt><strong><code>Y</code></strong> :&ensp;<code>optional list</code> of <code>networkx.Graph</code>, default=<code>None</code></dt>
+<dd>Second list of graphs. If not specified, <strong>X</strong> is used as the second list of graphs.
+This behavior allows to avoid computing features twice when the kernel is computed
+on the same lists.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>K</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>Evaluation of the kernel for each graph in <strong>X</strong> and <strong>Y</strong>.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def kernel(self, X: List[Graph], Y: Optional[List[Graph]] = None) -&gt; np.ndarray:
+    &#34;&#34;&#34;Compute the kernel between two list of graphs.
+
+    Parameters
+    ----------
+    X : list of networkx.Graph
+        First list of graphs.
+
+    Y : optional list of networkx.Graph, default=None
+        Second list of graphs. If not specified, **X** is used as the second list of graphs.
+        This behavior allows to avoid computing features twice when the kernel is computed
+        on the same lists.
+
+    Returns
+    -------
+    K : np.ndarray
+        Evaluation of the kernel for each graph in **X** and **Y**.
+    &#34;&#34;&#34;
+    # Initialize kernel
+    n = len(X)
+    m = len(Y) if Y is not None else n
+    K = np.zeros((n, m))
+
+    # Label enrichment with Morgan indices
+    X_morgan = label_enrichment_morgan(X, morgan_steps=self.morgan_steps)
+    if Y is not None:
+        Y_morgan = label_enrichment_morgan(Y, morgan_steps=self.morgan_steps)
+    else:
+        Y_morgan = X_morgan
+
+    # Label enrichment with Weisfeiler-Lehman procedure
+    X_wl = label_enrichment_wl(X_morgan, wl_steps=self.wl_steps)
+    if Y is not None:
+        Y_wl = label_enrichment_wl(Y_morgan, wl_steps=self.wl_steps)
+    else:
+        Y_wl = X_wl
+
+    # Compute the kernel
+    beta = 1
+
+    for order in range(1, self.order+1):
+
+        # Update beta
+        beta *= self.beta
+
+        for Xi, Yi in zip(X_wl, Y_wl):
+
+            # Progress bar
+            if self.verbose:
+                pbar = tqdm(range(n), desc=f&#34;Computing {order}-th order walk kernel&#34;)
+            else:
+                pbar = range(n)
+
+            visited_graphs = set()
+
+            # Compute walks
+            X_walks = find_nodes_walks(Xi, order=order)
+            if Y is not None:
+                Y_walks = find_nodes_walks(Yi, order=order)
+            else:
+                Y_walks = X_walks
+
+            # Compute labels sequences
+            X_sequences = compute_graphs_sequences(Xi, X_walks)
+            if Y is not None:
+                Y_sequences = compute_graphs_sequences(Yi, Y_walks)
+            else:
+                Y_sequences = X_sequences
+
+            # Aggregate results
+            for i in pbar:
+                for j in range(m):
+
+                    if (j, i) in visited_graphs:
+                        K[i, j] = K[j, i]
+                    else:
+                        K[i, j] += beta * len(X_sequences[i] &amp; Y_sequences[j])
+
+                    visited_graphs.add((i, j))
+
+    return K</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="src.kernels.Kernel"><code class="flex name class">
+<span>class <span class="ident">Kernel</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Abstract class for kernels.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Kernel(ABC):
+    &#34;&#34;&#34;Abstract class for kernels.&#34;&#34;&#34;
+
+    @property
+    @abstractmethod
+    def name(self):
+        &#34;&#34;&#34;Name of the kernel for instantiation.&#34;&#34;&#34;
+
+    @abstractmethod
+    def kernel(self, X: List[Graph], Y: Optional[List[Graph]] = None) -&gt; np.ndarray:
+        &#34;&#34;&#34;Compute the kernel between two list of graphs.
+
+        Parameters
+        ----------
+        X : list of networkx.Graph
+            First list of graphs.
+
+        Y : optional list of networkx.Graph, default=None
+            Second list of graphs. If not specified, **X** is used as the second list of graphs.
+            This behavior allows to avoid computing features twice when the kernel is computed
+            on the same lists.
+
+        Returns
+        -------
+        K : np.ndarray
+            Evaluation of the kernel for each graph in **X** and **Y**.
+        &#34;&#34;&#34;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>abc.ABC</li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="src.kernels.Kernel.name"><code class="name">var <span class="ident">name</span></code></dt>
+<dd>
+<div class="desc"><p>Name of the kernel for instantiation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+@abstractmethod
+def name(self):
+    &#34;&#34;&#34;Name of the kernel for instantiation.&#34;&#34;&#34;</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="src.kernels.Kernel.kernel"><code class="name flex">
+<span>def <span class="ident">kernel</span></span>(<span>self, X: List[networkx.classes.graph.Graph], Y: Optional[List[networkx.classes.graph.Graph]] = None) ‑> numpy.ndarray</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the kernel between two list of graphs.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>X</code></strong> :&ensp;<code>list</code> of <code>networkx.Graph</code></dt>
+<dd>First list of graphs.</dd>
+<dt><strong><code>Y</code></strong> :&ensp;<code>optional list</code> of <code>networkx.Graph</code>, default=<code>None</code></dt>
+<dd>Second list of graphs. If not specified, <strong>X</strong> is used as the second list of graphs.
+This behavior allows to avoid computing features twice when the kernel is computed
+on the same lists.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>K</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>Evaluation of the kernel for each graph in <strong>X</strong> and <strong>Y</strong>.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@abstractmethod
+def kernel(self, X: List[Graph], Y: Optional[List[Graph]] = None) -&gt; np.ndarray:
+    &#34;&#34;&#34;Compute the kernel between two list of graphs.
+
+    Parameters
+    ----------
+    X : list of networkx.Graph
+        First list of graphs.
+
+    Y : optional list of networkx.Graph, default=None
+        Second list of graphs. If not specified, **X** is used as the second list of graphs.
+        This behavior allows to avoid computing features twice when the kernel is computed
+        on the same lists.
+
+    Returns
+    -------
+    K : np.ndarray
+        Evaluation of the kernel for each graph in **X** and **Y**.
+    &#34;&#34;&#34;</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="src.kernels.NodeHistogramKernel"><code class="flex name class">
+<span>class <span class="ident">NodeHistogramKernel</span></span>
+<span>(</span><span>**kwargs: Dict[str, Any])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Node histogram graph kernel.</p>
+<p>Create the graph kernel.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>kwargs</code></strong> :&ensp;<code>dict</code> of <code>{str: any}</code></dt>
+<dd>Parameters for the graph kernel.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class NodeHistogramKernel(Kernel):
+    &#34;&#34;&#34;Node histogram graph kernel.&#34;&#34;&#34;
+
+    name = &#34;node_histogram&#34;
+
+    def __init__(self, **kwargs: Dict[str, Any]):
+        &#34;&#34;&#34;Create the graph kernel.
+
+        Parameters
+        ----------
+        kwargs : dict of {str: any}
+            Parameters for the graph kernel.
+        &#34;&#34;&#34;
+        # Verbosity
+        self.verbose = kwargs.get(&#34;verbose&#34;, False)
+
+        # Specific parameters
+        self.morgan_steps = kwargs.get(&#34;morgan_steps&#34;, 0)
+        self.wl_steps = kwargs.get(&#34;wl_steps&#34;, 0)
+        self.sigma = kwargs.get(&#34;sigma&#34;, 1.)
+
+    def kernel(self, X: List[Graph], Y: Optional[List[Graph]] = None) -&gt; np.ndarray:
+        &#34;&#34;&#34;Compute the kernel between two list of graphs.
+
+        Parameters
+        ----------
+        X : list of networkx.Graph
+            First list of graphs.
+
+        Y : optional list of networkx.Graph, default=None
+            Second list of graphs. If not specified, **X** is used as the second list of graphs.
+            This behavior allows to avoid computing features twice when the kernel is computed
+            on the same lists.
+
+        Returns
+        -------
+        K : np.ndarray
+            Evaluation of the kernel for each graph in **X** and **Y**.
+        &#34;&#34;&#34;
+        # Initialize kernel
+        n = len(X)
+        m = len(Y) if Y is not None else n
+        K = np.zeros((n, m))
+
+        # Label enrichment with Morgan indices
+        X_morgan = label_enrichment_morgan(X, morgan_steps=self.morgan_steps)
+        if Y is not None:
+            Y_morgan = label_enrichment_morgan(Y, morgan_steps=self.morgan_steps)
+        else:
+            Y_morgan = X_morgan
+
+        # Label enrichment with Weisfeiler-Lehman procedure
+        X_wl = label_enrichment_wl(X_morgan, wl_steps=self.wl_steps)
+        if Y is not None:
+            Y_wl = label_enrichment_wl(Y_morgan, wl_steps=self.wl_steps)
+        else:
+            Y_wl = X_wl
+
+        # For each enriched graphs, add the kernel
+        for Xi, Yi in zip(X_wl, Y_wl):
+
+            # Extract node histograms
+            X_nodes = extract_node_histograms(Xi, verbose=self.verbose)
+            if Y is not None:
+                Y_nodes = extract_node_histograms(Yi, verbose=self.verbose)
+            else:
+                Y_nodes = X_nodes
+
+            # Create arrays containing the node features
+            X_hist, Y_hist = assemble_histograms(X_nodes, Y_nodes)
+
+            # Compute the kernel
+            K += gaussian_kernel(X_hist, Y_hist, sigma=self.sigma)
+
+        return K</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>kernels.base.Kernel</li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="src.kernels.NodeHistogramKernel.name"><code class="name">var <span class="ident">name</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="src.kernels.NodeHistogramKernel.kernel"><code class="name flex">
+<span>def <span class="ident">kernel</span></span>(<span>self, X: List[networkx.classes.graph.Graph], Y: Optional[List[networkx.classes.graph.Graph]] = None) ‑> numpy.ndarray</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the kernel between two list of graphs.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>X</code></strong> :&ensp;<code>list</code> of <code>networkx.Graph</code></dt>
+<dd>First list of graphs.</dd>
+<dt><strong><code>Y</code></strong> :&ensp;<code>optional list</code> of <code>networkx.Graph</code>, default=<code>None</code></dt>
+<dd>Second list of graphs. If not specified, <strong>X</strong> is used as the second list of graphs.
+This behavior allows to avoid computing features twice when the kernel is computed
+on the same lists.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>K</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>Evaluation of the kernel for each graph in <strong>X</strong> and <strong>Y</strong>.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def kernel(self, X: List[Graph], Y: Optional[List[Graph]] = None) -&gt; np.ndarray:
+    &#34;&#34;&#34;Compute the kernel between two list of graphs.
+
+    Parameters
+    ----------
+    X : list of networkx.Graph
+        First list of graphs.
+
+    Y : optional list of networkx.Graph, default=None
+        Second list of graphs. If not specified, **X** is used as the second list of graphs.
+        This behavior allows to avoid computing features twice when the kernel is computed
+        on the same lists.
+
+    Returns
+    -------
+    K : np.ndarray
+        Evaluation of the kernel for each graph in **X** and **Y**.
+    &#34;&#34;&#34;
+    # Initialize kernel
+    n = len(X)
+    m = len(Y) if Y is not None else n
+    K = np.zeros((n, m))
+
+    # Label enrichment with Morgan indices
+    X_morgan = label_enrichment_morgan(X, morgan_steps=self.morgan_steps)
+    if Y is not None:
+        Y_morgan = label_enrichment_morgan(Y, morgan_steps=self.morgan_steps)
+    else:
+        Y_morgan = X_morgan
+
+    # Label enrichment with Weisfeiler-Lehman procedure
+    X_wl = label_enrichment_wl(X_morgan, wl_steps=self.wl_steps)
+    if Y is not None:
+        Y_wl = label_enrichment_wl(Y_morgan, wl_steps=self.wl_steps)
+    else:
+        Y_wl = X_wl
+
+    # For each enriched graphs, add the kernel
+    for Xi, Yi in zip(X_wl, Y_wl):
+
+        # Extract node histograms
+        X_nodes = extract_node_histograms(Xi, verbose=self.verbose)
+        if Y is not None:
+            Y_nodes = extract_node_histograms(Yi, verbose=self.verbose)
+        else:
+            Y_nodes = X_nodes
+
+        # Create arrays containing the node features
+        X_hist, Y_hist = assemble_histograms(X_nodes, Y_nodes)
+
+        # Compute the kernel
+        K += gaussian_kernel(X_hist, Y_hist, sigma=self.sigma)
+
+    return K</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="src.kernels.OrderWalkKernel"><code class="flex name class">
+<span>class <span class="ident">OrderWalkKernel</span></span>
+<span>(</span><span>**kwargs: Dict[str, Any])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Order walk graph kernel.</p>
+<p>Create the graph kernel.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>kwargs</code></strong> :&ensp;<code>dict</code> of <code>{str: any}</code></dt>
+<dd>Parameters for the graph kernel.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class OrderWalkKernel(Kernel):
+    &#34;&#34;&#34;Order walk graph kernel.&#34;&#34;&#34;
+
+    name = &#34;order_walk&#34;
+
+    def __init__(self, **kwargs: Dict[str, Any]):
+        &#34;&#34;&#34;Create the graph kernel.
+
+        Parameters
+        ----------
+        kwargs : dict of {str: any}
+            Parameters for the graph kernel.
+        &#34;&#34;&#34;
+        # Verbosity
+        self.verbose = kwargs.get(&#34;verbose&#34;, False)
+
+        # Specific parameters
+        self.morgan_steps = kwargs.get(&#34;morgan_steps&#34;, 0)
+        self.wl_steps = kwargs.get(&#34;wl_steps&#34;, 0)
+        self.order = kwargs.get(&#34;order&#34;, 3)
+
+    def kernel(self, X: List[Graph], Y: Optional[List[Graph]] = None) -&gt; np.ndarray:
+        &#34;&#34;&#34;Compute the kernel between two list of graphs.
+
+        Parameters
+        ----------
+        X : list of networkx.Graph
+            First list of graphs.
+
+        Y : optional list of networkx.Graph, default=None
+            Second list of graphs. If not specified, **X** is used as the second list of graphs.
+            This behavior allows to avoid computing features twice when the kernel is computed
+            on the same lists.
+
+        Returns
+        -------
+        K : np.ndarray
+            Evaluation of the kernel for each graph in **X** and **Y**.
+        &#34;&#34;&#34;
+        # Initialize kernel
+        n = len(X)
+        m = len(Y) if Y is not None else n
+        K = np.zeros((n, m))
+
+        # Label enrichment with Morgan indices
+        X_morgan = label_enrichment_morgan(X, morgan_steps=self.morgan_steps)
+        if Y is not None:
+            Y_morgan = label_enrichment_morgan(Y, morgan_steps=self.morgan_steps)
+        else:
+            Y_morgan = X_morgan
+
+        # Label enrichment with Weisfeiler-Lehman procedure
+        X_wl = label_enrichment_wl(X_morgan, wl_steps=self.wl_steps)
+        if Y is not None:
+            Y_wl = label_enrichment_wl(Y_morgan, wl_steps=self.wl_steps)
+        else:
+            Y_wl = X_wl
+
+        for Xi, Yi in zip(X_wl, Y_wl):
+
+            # Progress bar
+            if self.verbose:
+                pbar = tqdm(range(n), desc=f&#34;Computing {self.order}-th order walk kernel&#34;)
+            else:
+                pbar = range(n)
+
+            visited_graphs = set()
+
+            # Compute walks
+            X_walks = find_nodes_walks(Xi, order=self.order)
+            if Y is not None:
+                Y_walks = find_nodes_walks(Yi, order=self.order)
+            else:
+                Y_walks = X_walks
+
+            # Compute labels sequences
+            X_sequences = compute_graphs_sequences(Xi, X_walks)
+            if Y is not None:
+                Y_sequences = compute_graphs_sequences(Yi, Y_walks)
+            else:
+                Y_sequences = X_sequences
+
+            # Compute the kernel
+            for i in pbar:
+                for j in range(m):
+
+                    if (j, i) in visited_graphs:
+                        K[i, j] = K[j, i]
+                    else:
+                        K[i, j] += len(X_sequences[i] &amp; Y_sequences[j])
+
+                    visited_graphs.add((i, j))
+
+        return K</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>kernels.base.Kernel</li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="src.kernels.OrderWalkKernel.name"><code class="name">var <span class="ident">name</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="src.kernels.OrderWalkKernel.kernel"><code class="name flex">
+<span>def <span class="ident">kernel</span></span>(<span>self, X: List[networkx.classes.graph.Graph], Y: Optional[List[networkx.classes.graph.Graph]] = None) ‑> numpy.ndarray</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the kernel between two list of graphs.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>X</code></strong> :&ensp;<code>list</code> of <code>networkx.Graph</code></dt>
+<dd>First list of graphs.</dd>
+<dt><strong><code>Y</code></strong> :&ensp;<code>optional list</code> of <code>networkx.Graph</code>, default=<code>None</code></dt>
+<dd>Second list of graphs. If not specified, <strong>X</strong> is used as the second list of graphs.
+This behavior allows to avoid computing features twice when the kernel is computed
+on the same lists.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>K</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>Evaluation of the kernel for each graph in <strong>X</strong> and <strong>Y</strong>.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def kernel(self, X: List[Graph], Y: Optional[List[Graph]] = None) -&gt; np.ndarray:
+    &#34;&#34;&#34;Compute the kernel between two list of graphs.
+
+    Parameters
+    ----------
+    X : list of networkx.Graph
+        First list of graphs.
+
+    Y : optional list of networkx.Graph, default=None
+        Second list of graphs. If not specified, **X** is used as the second list of graphs.
+        This behavior allows to avoid computing features twice when the kernel is computed
+        on the same lists.
+
+    Returns
+    -------
+    K : np.ndarray
+        Evaluation of the kernel for each graph in **X** and **Y**.
+    &#34;&#34;&#34;
+    # Initialize kernel
+    n = len(X)
+    m = len(Y) if Y is not None else n
+    K = np.zeros((n, m))
+
+    # Label enrichment with Morgan indices
+    X_morgan = label_enrichment_morgan(X, morgan_steps=self.morgan_steps)
+    if Y is not None:
+        Y_morgan = label_enrichment_morgan(Y, morgan_steps=self.morgan_steps)
+    else:
+        Y_morgan = X_morgan
+
+    # Label enrichment with Weisfeiler-Lehman procedure
+    X_wl = label_enrichment_wl(X_morgan, wl_steps=self.wl_steps)
+    if Y is not None:
+        Y_wl = label_enrichment_wl(Y_morgan, wl_steps=self.wl_steps)
+    else:
+        Y_wl = X_wl
+
+    for Xi, Yi in zip(X_wl, Y_wl):
+
+        # Progress bar
+        if self.verbose:
+            pbar = tqdm(range(n), desc=f&#34;Computing {self.order}-th order walk kernel&#34;)
+        else:
+            pbar = range(n)
+
+        visited_graphs = set()
+
+        # Compute walks
+        X_walks = find_nodes_walks(Xi, order=self.order)
+        if Y is not None:
+            Y_walks = find_nodes_walks(Yi, order=self.order)
+        else:
+            Y_walks = X_walks
+
+        # Compute labels sequences
+        X_sequences = compute_graphs_sequences(Xi, X_walks)
+        if Y is not None:
+            Y_sequences = compute_graphs_sequences(Yi, Y_walks)
+        else:
+            Y_sequences = X_sequences
+
+        # Compute the kernel
+        for i in pbar:
+            for j in range(m):
+
+                if (j, i) in visited_graphs:
+                    K[i, j] = K[j, i]
+                else:
+                    K[i, j] += len(X_sequences[i] &amp; Y_sequences[j])
+
+                visited_graphs.add((i, j))
+
+    return K</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="src.kernels.ShortestPathKernel"><code class="flex name class">
+<span>class <span class="ident">ShortestPathKernel</span></span>
+<span>(</span><span>**kwargs: Dict[str, Any])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Shortest path graph kernel.</p>
+<p>Create the graph kernel.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>kwargs</code></strong> :&ensp;<code>dict</code> of <code>{str: any}</code></dt>
+<dd>Parameters for the graph kernel.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ShortestPathKernel(Kernel):
+    &#34;&#34;&#34;Shortest path graph kernel.&#34;&#34;&#34;
+
+    name = &#34;shortest_path&#34;
+
+    def __init__(self, **kwargs: Dict[str, Any]):
+        &#34;&#34;&#34;Create the graph kernel.
+
+        Parameters
+        ----------
+        kwargs : dict of {str: any}
+            Parameters for the graph kernel.
+        &#34;&#34;&#34;
+        # Verbosity
+        self.verbose = kwargs.get(&#34;verbose&#34;, False)
+
+        # Specific parameters
+        self.morgan_steps = kwargs.get(&#34;morgan_steps&#34;, 0)
+        self.wl_steps = kwargs.get(&#34;wl_steps&#34;, 0)
+        self.margin = kwargs.get(&#34;margin&#34;, 2)
+
+    def kernel(self, X: List[Graph], Y: Optional[List[Graph]] = None) -&gt; np.ndarray:
+        &#34;&#34;&#34;Compute the kernel between two list of graphs.
+
+        Parameters
+        ----------
+        X : list of networkx.Graph
+            First list of graphs.
+
+        Y : optional list of networkx.Graph, default=None
+            Second list of graphs. If not specified, **X** is used as the second list of graphs.
+            This behavior allows to avoid computing features twice when the kernel is computed
+            on the same lists.
+
+        Returns
+        -------
+        K : np.ndarray
+            Evaluation of the kernel for each graph in **X** and **Y**.
+        &#34;&#34;&#34;
+        # Initialize kernel
+        n = len(X)
+        m = len(Y) if Y is not None else n
+        K = np.zeros((n, m))
+
+        # Label enrichment with Morgan indices
+        X_morgan = label_enrichment_morgan(X, morgan_steps=self.morgan_steps)
+        if Y is not None:
+            Y_morgan = label_enrichment_morgan(Y, morgan_steps=self.morgan_steps)
+        else:
+            Y_morgan = X_morgan
+
+        # Label enrichment with Weisfeiler-Lehman procedure
+        X_wl = label_enrichment_wl(X_morgan, wl_steps=self.wl_steps)
+        if Y is not None:
+            Y_wl = label_enrichment_wl(Y_morgan, wl_steps=self.wl_steps)
+        else:
+            Y_wl = X_wl
+
+        for Xi, Yi in zip(X_wl, Y_wl):
+
+            # Progress bar
+            if self.verbose:
+                pbar = tqdm(range(n), desc=&#34;Computing shortest path kernel&#34;)
+            else:
+                pbar = range(n)
+
+            visited_graphs = set()
+
+            # Compute shortest paths
+            X_shortest = [nx.floyd_warshall(graph) for graph in Xi]
+            if Y is not None:
+                Y_shortest = [nx.floyd_warshall(graph) for graph in Yi]
+            else:
+                Y_shortest = X_shortest
+
+            # Compute the labels sequences
+            X_l, X_l_inv, X_l_dict, X_l_inv_dict, _ = compute_shortest_path_sequences(
+                Xi, X_shortest
+            )
+            if Y is not None:
+                Y_l, _, Y_l_dict, _, _ = compute_shortest_path_sequences(Yi, Y_shortest)
+            else:
+                Y_l = X_l
+                Y_l_dict = X_l_dict
+                # Y_costs_dict = X_costs_dict
+
+            # Compute the kernel
+            for i in pbar:
+                for j in range(m):
+
+                    if (j, i) in visited_graphs:
+
+                        K[i, j] = K[j, i]
+
+                    else:
+
+                        k_i_j = 0
+
+                        common_labels = X_l[i] &amp; Y_l[j]
+
+                        for ld in common_labels:
+
+                            # Delta kernel
+                            k_i_j += X_l_dict[i][ld] * Y_l_dict[j][ld]
+
+                            # Brownian bridge kernel
+                            # c_diff = np.abs(X_costs_dict[i][ld] - Y_costs_dict[j][ld])
+                            # k_i_j += max(0, self.margin - e_diff)
+
+                        common_labels_inv = X_l_inv[i] &amp; Y_l[j]
+
+                        for li in common_labels_inv:
+
+                            # Delta kernel
+                            k_i_j += X_l_inv_dict[i][li] * Y_l_dict[j][li]
+
+                            # Brownian bridge kernel
+                            # e_diff = np.abs(X_costs_dict[i][li[::-1]] - Y_costs_dict[j][li[::-1]])
+                            # k_i_j += max(0, self.margin - e_diff)
+
+                        K[i, j] += k_i_j
+
+                    visited_graphs.add((i, j))
+
+        return K</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>kernels.base.Kernel</li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="src.kernels.ShortestPathKernel.name"><code class="name">var <span class="ident">name</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="src.kernels.ShortestPathKernel.kernel"><code class="name flex">
+<span>def <span class="ident">kernel</span></span>(<span>self, X: List[networkx.classes.graph.Graph], Y: Optional[List[networkx.classes.graph.Graph]] = None) ‑> numpy.ndarray</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the kernel between two list of graphs.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>X</code></strong> :&ensp;<code>list</code> of <code>networkx.Graph</code></dt>
+<dd>First list of graphs.</dd>
+<dt><strong><code>Y</code></strong> :&ensp;<code>optional list</code> of <code>networkx.Graph</code>, default=<code>None</code></dt>
+<dd>Second list of graphs. If not specified, <strong>X</strong> is used as the second list of graphs.
+This behavior allows to avoid computing features twice when the kernel is computed
+on the same lists.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>K</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>Evaluation of the kernel for each graph in <strong>X</strong> and <strong>Y</strong>.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def kernel(self, X: List[Graph], Y: Optional[List[Graph]] = None) -&gt; np.ndarray:
+    &#34;&#34;&#34;Compute the kernel between two list of graphs.
+
+    Parameters
+    ----------
+    X : list of networkx.Graph
+        First list of graphs.
+
+    Y : optional list of networkx.Graph, default=None
+        Second list of graphs. If not specified, **X** is used as the second list of graphs.
+        This behavior allows to avoid computing features twice when the kernel is computed
+        on the same lists.
+
+    Returns
+    -------
+    K : np.ndarray
+        Evaluation of the kernel for each graph in **X** and **Y**.
+    &#34;&#34;&#34;
+    # Initialize kernel
+    n = len(X)
+    m = len(Y) if Y is not None else n
+    K = np.zeros((n, m))
+
+    # Label enrichment with Morgan indices
+    X_morgan = label_enrichment_morgan(X, morgan_steps=self.morgan_steps)
+    if Y is not None:
+        Y_morgan = label_enrichment_morgan(Y, morgan_steps=self.morgan_steps)
+    else:
+        Y_morgan = X_morgan
+
+    # Label enrichment with Weisfeiler-Lehman procedure
+    X_wl = label_enrichment_wl(X_morgan, wl_steps=self.wl_steps)
+    if Y is not None:
+        Y_wl = label_enrichment_wl(Y_morgan, wl_steps=self.wl_steps)
+    else:
+        Y_wl = X_wl
+
+    for Xi, Yi in zip(X_wl, Y_wl):
+
+        # Progress bar
+        if self.verbose:
+            pbar = tqdm(range(n), desc=&#34;Computing shortest path kernel&#34;)
+        else:
+            pbar = range(n)
+
+        visited_graphs = set()
+
+        # Compute shortest paths
+        X_shortest = [nx.floyd_warshall(graph) for graph in Xi]
+        if Y is not None:
+            Y_shortest = [nx.floyd_warshall(graph) for graph in Yi]
+        else:
+            Y_shortest = X_shortest
+
+        # Compute the labels sequences
+        X_l, X_l_inv, X_l_dict, X_l_inv_dict, _ = compute_shortest_path_sequences(
+            Xi, X_shortest
+        )
+        if Y is not None:
+            Y_l, _, Y_l_dict, _, _ = compute_shortest_path_sequences(Yi, Y_shortest)
+        else:
+            Y_l = X_l
+            Y_l_dict = X_l_dict
+            # Y_costs_dict = X_costs_dict
+
+        # Compute the kernel
+        for i in pbar:
+            for j in range(m):
+
+                if (j, i) in visited_graphs:
+
+                    K[i, j] = K[j, i]
+
+                else:
+
+                    k_i_j = 0
+
+                    common_labels = X_l[i] &amp; Y_l[j]
+
+                    for ld in common_labels:
+
+                        # Delta kernel
+                        k_i_j += X_l_dict[i][ld] * Y_l_dict[j][ld]
+
+                        # Brownian bridge kernel
+                        # c_diff = np.abs(X_costs_dict[i][ld] - Y_costs_dict[j][ld])
+                        # k_i_j += max(0, self.margin - e_diff)
+
+                    common_labels_inv = X_l_inv[i] &amp; Y_l[j]
+
+                    for li in common_labels_inv:
+
+                        # Delta kernel
+                        k_i_j += X_l_inv_dict[i][li] * Y_l_dict[j][li]
+
+                        # Brownian bridge kernel
+                        # e_diff = np.abs(X_costs_dict[i][li[::-1]] - Y_costs_dict[j][li[::-1]])
+                        # k_i_j += max(0, self.margin - e_diff)
+
+                    K[i, j] += k_i_j
+
+                visited_graphs.add((i, j))
+
+    return K</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="src.kernels.SumKernel"><code class="flex name class">
+<span>class <span class="ident">SumKernel</span></span>
+<span>(</span><span>**kwargs: Dict[str, Any])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sum graph kernel.</p>
+<p>Create the graph kernel.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>kwargs</code></strong> :&ensp;<code>dict</code> of <code>{str: any}</code></dt>
+<dd>Parameters for the graph kernel.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class SumKernel(Kernel):
+    &#34;&#34;&#34;Sum graph kernel.&#34;&#34;&#34;
+
+    name = &#34;sum&#34;
+
+    def __init__(self, **kwargs: Dict[str, Any]):
+        &#34;&#34;&#34;Create the graph kernel.
+
+        Parameters
+        ----------
+        kwargs : dict of {str: any}
+            Parameters for the graph kernel.
+        &#34;&#34;&#34;
+        # Verbosity
+        self.verbose = kwargs.get(&#34;verbose&#34;, False)
+
+        # Specific parameters
+        self.sigma = kwargs.get(&#34;sigma&#34;, 4.96)
+        self.sigma_m = kwargs.get(&#34;sigma_m&#34;, 0.04)
+        self.sigma_wl = kwargs.get(&#34;sigma_wl&#34;, 1.18)
+        self.beta = kwargs.get(&#34;beta&#34;, 2.34)
+        self.beta_m = kwargs.get(&#34;beta_m&#34;, 1.89)
+        self.beta_wl = kwargs.get(&#34;beta_wl&#34;, 0.23)
+
+        # Subkernels
+        self.kernels = [
+            # No label enrichment
+            CountingKernel(verbose=self.verbose, sigma=self.sigma),
+            EdgeHistogramKernel(verbose=self.verbose, sigma=self.sigma),
+            NodeHistogramKernel(
+                verbose=self.verbose, morgan_steps=0, wl_steps=0, sigma=self.sigma
+            ),
+            GeometricWalkKernel(
+                verbose=self.verbose, morgan_steps=0, wl_steps=0, order=4, beta=self.beta
+            ),
+            ShortestPathKernel(verbose=self.verbose, morgan_steps=0, wl_steps=0),
+
+            # Morgan label enrichment
+            NodeHistogramKernel(
+                verbose=self.verbose, morgan_steps=1, wl_steps=0, sigma=self.sigma_m
+            ),
+            GeometricWalkKernel(
+                verbose=self.verbose, morgan_steps=1, wl_steps=0, order=4, beta=self.beta_m
+            ),
+            ShortestPathKernel(verbose=self.verbose, morgan_steps=1, wl_steps=0),
+
+            # Weisfeiler-Lehman label enrichment
+            NodeHistogramKernel(
+                verbose=self.verbose, morgan_steps=0, wl_steps=1, sigma=self.sigma_wl
+            ),
+            GeometricWalkKernel(
+                verbose=self.verbose, morgan_steps=0, wl_steps=1, order=4, beta=self.beta_wl
+            ),
+            ShortestPathKernel(verbose=self.verbose, morgan_steps=0, wl_steps=1),
+        ]
+
+        self.n_kernels = len(self.kernels)
+        self.eta = np.ones(self.n_kernels) / self.n_kernels
+
+        self.normalize = False
+        self.center = False
+
+    def get_eta(self):
+        &#34;&#34;&#34;Return the weights of the kernels.&#34;&#34;&#34;
+        return self.eta
+
+    def set_eta(self, eta):
+        &#34;&#34;&#34;Set the weights of the kernels.&#34;&#34;&#34;
+        assert len(eta) == len(self.eta), &#34;Length mismatch in the weights of the kernels!&#34;
+        self.eta = eta
+
+    def compute_kernel_list(
+        self, X: List[Graph], Y: Optional[List[Graph]] = None
+    ) -&gt; List[np.ndarray]:
+        &#34;&#34;&#34;Compute all the kernels.
+
+        Parameters
+        ----------
+        X : list of networkx.Graph
+            First list of graphs.
+
+        Y : optional list of networkx.Graph, default=None
+            Second list of graphs. If not specified, **X** is used as the second list of graphs.
+            This behavior allows to avoid computing features twice when the kernel is computed
+            on the same lists.
+
+        Returns
+        -------
+        K_list : list of np.ndarray
+            Evaluation of the kernels for each graph in **X** and **Y**.
+        &#34;&#34;&#34;
+        # Compute all the kernels
+        K_list = []
+
+        for kernel in self.kernels:
+
+            X_kernel = [graph.copy() for graph in X]
+            if Y is not None:
+                Y_kernel = [graph.copy() for graph in Y]
+            else:
+                Y_kernel = None
+
+            K_list.append(kernel.kernel(X_kernel, Y=Y_kernel))
+
+        # Normalize all the kernels
+        if self.normalize:
+
+            K_list = [normalize_kernel(k) for k in K_list]
+
+        # Center all the kernels
+        if self.center:
+
+            K_list = [center_kernel(k) for k in K_list]
+
+        return K_list
+
+    def kernel(self, X: List[Graph], Y: Optional[List[Graph]] = None) -&gt; np.ndarray:
+        &#34;&#34;&#34;Compute the kernel between two list of graphs.
+
+        Parameters
+        ----------
+        X : list of networkx.Graph
+            First list of graphs.
+
+        Y : optional list of networkx.Graph, default=None
+            Second list of graphs. If not specified, **X** is used as the second list of graphs.
+            This behavior allows to avoid computing features twice when the kernel is computed
+            on the same lists.
+
+        Returns
+        -------
+        K : np.ndarray
+            Evaluation of the kernel for each graph in **X** and **Y**.
+        &#34;&#34;&#34;
+        # Compute all the kernels
+        K_list = self.compute_kernel_list(X, Y=Y)
+
+        # Compute the sum
+        K = np.sum([eta * k for eta, k in zip(self.eta, K_list)], axis=0)
+
+        return K</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>kernels.base.Kernel</li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="src.kernels.SumKernel.name"><code class="name">var <span class="ident">name</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="src.kernels.SumKernel.compute_kernel_list"><code class="name flex">
+<span>def <span class="ident">compute_kernel_list</span></span>(<span>self, X: List[networkx.classes.graph.Graph], Y: Optional[List[networkx.classes.graph.Graph]] = None) ‑> List[numpy.ndarray]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute all the kernels.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>X</code></strong> :&ensp;<code>list</code> of <code>networkx.Graph</code></dt>
+<dd>First list of graphs.</dd>
+<dt><strong><code>Y</code></strong> :&ensp;<code>optional list</code> of <code>networkx.Graph</code>, default=<code>None</code></dt>
+<dd>Second list of graphs. If not specified, <strong>X</strong> is used as the second list of graphs.
+This behavior allows to avoid computing features twice when the kernel is computed
+on the same lists.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>K_list</code></strong> :&ensp;<code>list</code> of <code>np.ndarray</code></dt>
+<dd>Evaluation of the kernels for each graph in <strong>X</strong> and <strong>Y</strong>.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_kernel_list(
+    self, X: List[Graph], Y: Optional[List[Graph]] = None
+) -&gt; List[np.ndarray]:
+    &#34;&#34;&#34;Compute all the kernels.
+
+    Parameters
+    ----------
+    X : list of networkx.Graph
+        First list of graphs.
+
+    Y : optional list of networkx.Graph, default=None
+        Second list of graphs. If not specified, **X** is used as the second list of graphs.
+        This behavior allows to avoid computing features twice when the kernel is computed
+        on the same lists.
+
+    Returns
+    -------
+    K_list : list of np.ndarray
+        Evaluation of the kernels for each graph in **X** and **Y**.
+    &#34;&#34;&#34;
+    # Compute all the kernels
+    K_list = []
+
+    for kernel in self.kernels:
+
+        X_kernel = [graph.copy() for graph in X]
+        if Y is not None:
+            Y_kernel = [graph.copy() for graph in Y]
+        else:
+            Y_kernel = None
+
+        K_list.append(kernel.kernel(X_kernel, Y=Y_kernel))
+
+    # Normalize all the kernels
+    if self.normalize:
+
+        K_list = [normalize_kernel(k) for k in K_list]
+
+    # Center all the kernels
+    if self.center:
+
+        K_list = [center_kernel(k) for k in K_list]
+
+    return K_list</code></pre>
+</details>
+</dd>
+<dt id="src.kernels.SumKernel.get_eta"><code class="name flex">
+<span>def <span class="ident">get_eta</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return the weights of the kernels.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_eta(self):
+    &#34;&#34;&#34;Return the weights of the kernels.&#34;&#34;&#34;
+    return self.eta</code></pre>
+</details>
+</dd>
+<dt id="src.kernels.SumKernel.kernel"><code class="name flex">
+<span>def <span class="ident">kernel</span></span>(<span>self, X: List[networkx.classes.graph.Graph], Y: Optional[List[networkx.classes.graph.Graph]] = None) ‑> numpy.ndarray</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the kernel between two list of graphs.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>X</code></strong> :&ensp;<code>list</code> of <code>networkx.Graph</code></dt>
+<dd>First list of graphs.</dd>
+<dt><strong><code>Y</code></strong> :&ensp;<code>optional list</code> of <code>networkx.Graph</code>, default=<code>None</code></dt>
+<dd>Second list of graphs. If not specified, <strong>X</strong> is used as the second list of graphs.
+This behavior allows to avoid computing features twice when the kernel is computed
+on the same lists.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>K</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>Evaluation of the kernel for each graph in <strong>X</strong> and <strong>Y</strong>.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def kernel(self, X: List[Graph], Y: Optional[List[Graph]] = None) -&gt; np.ndarray:
+    &#34;&#34;&#34;Compute the kernel between two list of graphs.
+
+    Parameters
+    ----------
+    X : list of networkx.Graph
+        First list of graphs.
+
+    Y : optional list of networkx.Graph, default=None
+        Second list of graphs. If not specified, **X** is used as the second list of graphs.
+        This behavior allows to avoid computing features twice when the kernel is computed
+        on the same lists.
+
+    Returns
+    -------
+    K : np.ndarray
+        Evaluation of the kernel for each graph in **X** and **Y**.
+    &#34;&#34;&#34;
+    # Compute all the kernels
+    K_list = self.compute_kernel_list(X, Y=Y)
+
+    # Compute the sum
+    K = np.sum([eta * k for eta, k in zip(self.eta, K_list)], axis=0)
+
+    return K</code></pre>
+</details>
+</dd>
+<dt id="src.kernels.SumKernel.set_eta"><code class="name flex">
+<span>def <span class="ident">set_eta</span></span>(<span>self, eta)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Set the weights of the kernels.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_eta(self, eta):
+    &#34;&#34;&#34;Set the weights of the kernels.&#34;&#34;&#34;
+    assert len(eta) == len(self.eta), &#34;Length mismatch in the weights of the kernels!&#34;
+    self.eta = eta</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src" href="../index.html">src</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<ul>
+<li><code><a title="src.kernels.base" href="base.html">src.kernels.base</a></code></li>
+<li><code><a title="src.kernels.count" href="count.html">src.kernels.count</a></code></li>
+<li><code><a title="src.kernels.edge_histogram" href="edge_histogram.html">src.kernels.edge_histogram</a></code></li>
+<li><code><a title="src.kernels.geometric_walk" href="geometric_walk.html">src.kernels.geometric_walk</a></code></li>
+<li><code><a title="src.kernels.node_histogram" href="node_histogram.html">src.kernels.node_histogram</a></code></li>
+<li><code><a title="src.kernels.order_walk" href="order_walk.html">src.kernels.order_walk</a></code></li>
+<li><code><a title="src.kernels.shortest_path" href="shortest_path.html">src.kernels.shortest_path</a></code></li>
+<li><code><a title="src.kernels.sum" href="sum.html">src.kernels.sum</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="src.kernels.CountingKernel" href="#src.kernels.CountingKernel">CountingKernel</a></code></h4>
+<ul class="">
+<li><code><a title="src.kernels.CountingKernel.kernel" href="#src.kernels.CountingKernel.kernel">kernel</a></code></li>
+<li><code><a title="src.kernels.CountingKernel.name" href="#src.kernels.CountingKernel.name">name</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="src.kernels.EdgeHistogramKernel" href="#src.kernels.EdgeHistogramKernel">EdgeHistogramKernel</a></code></h4>
+<ul class="">
+<li><code><a title="src.kernels.EdgeHistogramKernel.kernel" href="#src.kernels.EdgeHistogramKernel.kernel">kernel</a></code></li>
+<li><code><a title="src.kernels.EdgeHistogramKernel.name" href="#src.kernels.EdgeHistogramKernel.name">name</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="src.kernels.GeometricWalkKernel" href="#src.kernels.GeometricWalkKernel">GeometricWalkKernel</a></code></h4>
+<ul class="">
+<li><code><a title="src.kernels.GeometricWalkKernel.kernel" href="#src.kernels.GeometricWalkKernel.kernel">kernel</a></code></li>
+<li><code><a title="src.kernels.GeometricWalkKernel.name" href="#src.kernels.GeometricWalkKernel.name">name</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="src.kernels.Kernel" href="#src.kernels.Kernel">Kernel</a></code></h4>
+<ul class="">
+<li><code><a title="src.kernels.Kernel.kernel" href="#src.kernels.Kernel.kernel">kernel</a></code></li>
+<li><code><a title="src.kernels.Kernel.name" href="#src.kernels.Kernel.name">name</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="src.kernels.NodeHistogramKernel" href="#src.kernels.NodeHistogramKernel">NodeHistogramKernel</a></code></h4>
+<ul class="">
+<li><code><a title="src.kernels.NodeHistogramKernel.kernel" href="#src.kernels.NodeHistogramKernel.kernel">kernel</a></code></li>
+<li><code><a title="src.kernels.NodeHistogramKernel.name" href="#src.kernels.NodeHistogramKernel.name">name</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="src.kernels.OrderWalkKernel" href="#src.kernels.OrderWalkKernel">OrderWalkKernel</a></code></h4>
+<ul class="">
+<li><code><a title="src.kernels.OrderWalkKernel.kernel" href="#src.kernels.OrderWalkKernel.kernel">kernel</a></code></li>
+<li><code><a title="src.kernels.OrderWalkKernel.name" href="#src.kernels.OrderWalkKernel.name">name</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="src.kernels.ShortestPathKernel" href="#src.kernels.ShortestPathKernel">ShortestPathKernel</a></code></h4>
+<ul class="">
+<li><code><a title="src.kernels.ShortestPathKernel.kernel" href="#src.kernels.ShortestPathKernel.kernel">kernel</a></code></li>
+<li><code><a title="src.kernels.ShortestPathKernel.name" href="#src.kernels.ShortestPathKernel.name">name</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="src.kernels.SumKernel" href="#src.kernels.SumKernel">SumKernel</a></code></h4>
+<ul class="">
+<li><code><a title="src.kernels.SumKernel.compute_kernel_list" href="#src.kernels.SumKernel.compute_kernel_list">compute_kernel_list</a></code></li>
+<li><code><a title="src.kernels.SumKernel.get_eta" href="#src.kernels.SumKernel.get_eta">get_eta</a></code></li>
+<li><code><a title="src.kernels.SumKernel.kernel" href="#src.kernels.SumKernel.kernel">kernel</a></code></li>
+<li><code><a title="src.kernels.SumKernel.name" href="#src.kernels.SumKernel.name">name</a></code></li>
+<li><code><a title="src.kernels.SumKernel.set_eta" href="#src.kernels.SumKernel.set_eta">set_eta</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
